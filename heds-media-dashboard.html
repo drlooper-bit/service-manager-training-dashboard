@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HEDS — Heavy Equipment Dealer Solutions</title>
 <meta name="description" content="HEDS finds the money your dealership or rental company is losing and installs the daily discipline to keep it from coming back. Due diligence inspections, onsite training, and performance coaching for heavy equipment dealerships and rental companies.">
+<link rel="icon" type="image/png" href="LOGO_HEDS_small.png">
+<link rel="canonical" href="https://drlooper-bit.github.io/service-manager-training-dashboard/heds-media-dashboard.html">
+<meta property="og:title" content="HEDS — Heavy Equipment Dealer Solutions">
+<meta property="og:description" content="We find the money your operation is losing or overlooking — and install the discipline to keep the bottlenecks from coming back. Due diligence inspections, onsite training, and performance coaching for heavy equipment dealerships and rental companies.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://drlooper-bit.github.io/service-manager-training-dashboard/heds-media-dashboard.html">
+<meta property="og:image" content="https://drlooper-bit.github.io/service-manager-training-dashboard/LOGO_HEDS.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HEDS — Heavy Equipment Dealer Solutions">
+<meta name="twitter:description" content="We find the money your operation is losing or overlooking — and install the discipline to keep the bottlenecks from coming back.">
+<meta name="twitter:image" content="https://drlooper-bit.github.io/service-manager-training-dashboard/LOGO_HEDS.png">
 <style>
 :root {
   --bg: #0a1f44;
@@ -21,7 +32,7 @@
   --navy: #00205B;
   --grey: #8C8C8C;
   --success: #22c55e;
-  --danger: #ef4444;
+  --danger: #f87171;
   --radius: 8px;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
@@ -37,6 +48,11 @@ body {
 }
 
 /* ===== HEADER ===== */
+.site-header-group {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 .header {
   background: var(--bg);
   border-bottom: 3px solid var(--accent);
@@ -44,9 +60,6 @@ body {
   display: flex;
   align-items: center;
   gap: 20px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
   box-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
@@ -83,8 +96,6 @@ body {
   border-bottom: 1px solid var(--border);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  position: sticky;
-  top: 104px;
   z-index: 99;
 }
 
@@ -273,6 +284,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: background 0.2s;
+  cursor: pointer;
 }
 .cta-btn:hover { background: var(--accent-hover); }
 
@@ -284,8 +296,17 @@ body {
   text-decoration: none;
   border-bottom: 1px solid var(--border);
   padding-bottom: 2px;
+  cursor: pointer;
 }
 .cta-secondary:hover { color: var(--accent); }
+
+/* ===== TABLE CONTAINER (responsive) ===== */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 16px;
+}
 
 /* ===== CONTACT ===== */
 .contact-block {
@@ -389,25 +410,27 @@ body {
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
-<div class="header">
-  <img src="LOGO_HEDS.png" alt="HEDS Logo" class="header-logo" onclick="showSection('overview', this)" onerror="this.style.display='none'">
+<!-- ===== HEADER + NAV (sticky group) ===== -->
+<div class="site-header-group">
+<header class="header">
+  <img src="LOGO_HEDS_small.png" alt="HEDS Logo" width="64" height="64" class="header-logo" onclick="showSection('overview')" onerror="this.style.display='none'">
   <div class="header-text">
     <h1>HEDS</h1>
     <p>Heavy Equipment Dealer Solutions</p>
   </div>
-</div>
+</header>
 
 <!-- ===== TAB NAV ===== -->
-<div class="tab-nav">
-  <button class="tab-btn active" onclick="showSection('overview', this)">Overview</button>
-  <button class="tab-btn" onclick="showSection('diligence', this)">Due Diligence &amp; Inspections</button>
-  <button class="tab-btn" onclick="showSection('training', this)">Training &amp; Academy</button>
-  <button class="tab-btn" onclick="showSection('contact', this)">Contact</button>
+<nav class="tab-nav" role="tablist">
+  <button class="tab-btn active" role="tab" aria-selected="true" onclick="showSection('overview', this)">Overview</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="showSection('diligence', this)">Due Diligence &amp; Inspections</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="showSection('training', this)">Training &amp; Academy</button>
+  <button class="tab-btn" role="tab" aria-selected="false" onclick="showSection('contact', this)">Contact</button>
+</nav>
 </div>
 
 <!-- ===== OVERVIEW SECTION ===== -->
-<div class="section active" id="sec-overview">
+<div class="section active" id="sec-overview" role="tabpanel">
   <div class="hero">
     <h2>We find the money your operation is losing or overlooking — and install the discipline to keep the bottlenecks from coming back.</h2>
     <p>HEDS is a heavy equipment dealership services firm serving dealers, rental companies, and equipment groups across the United States. We combine onsite operational audits with hands-on management training to stop margin leakage where it starts — on the shop floor.</p>
@@ -418,13 +441,13 @@ body {
       <div class="service-icon">🔍</div>
       <h3>Due Diligence &amp; Inspections</h3>
       <p>Onsite operational audits that find the dollar leaks in your service, parts, and rental departments. We walk your floor, pull your ERP reports, and show you exactly where the cash is leaving.</p>
-      <a class="cta-secondary" onclick="showSection('diligence', this)">Learn More →</a>
+      <a class="cta-secondary" href="#sec-diligence" onclick="showSection('diligence'); return false;">Learn More →</a>
     </div>
     <div class="service-card">
       <div class="service-icon">🎓</div>
       <h3>Training &amp; Academy</h3>
       <p>Onsite training that installs the daily operating discipline to stop the leaks from coming back. 5 days at your dealership or rental company with your real data, your people, and your shop floor.</p>
-      <a class="cta-secondary" onclick="showSection('training', this)">Learn More →</a>
+      <a class="cta-secondary" href="#sec-training" onclick="showSection('training'); return false;">Learn More →</a>
     </div>
   </div>
 
@@ -465,12 +488,12 @@ body {
   <div class="card" style="text-align:center;">
     <h2>Ready to find the money your operation is losing or overlooking?</h2>
     <p>Book a 30-minute discovery call. We'll review what's happening and recommend where to start.</p>
-    <a class="cta-btn" onclick="showSection('contact', this)">Get in Touch</a>
+    <a class="cta-btn" href="#sec-contact" onclick="showSection('contact'); return false;">Get in Touch</a>
   </div>
 </div>
 
 <!-- ===== DUE DILIGENCE SECTION ===== -->
-<div class="section" id="sec-diligence">
+<div class="section" id="sec-diligence" role="tabpanel">
   <div class="hero">
     <h2>Due Diligence &amp; Operational Inspections</h2>
     <p>We walk your floor, pull your ERP reports, and show you exactly where the cash is leaving. Not a desktop review — a full onsite operational audit of your service, parts, and rental departments.</p>
@@ -581,7 +604,7 @@ body {
   <div class="card">
     <h2>Pricing</h2>
     <p>All pricing built from a $200/hour labor rate. Inspections are scoped based on dealership or rental company size and number of departments audited.</p>
-    <table class="table">
+    <div class="table-container"><table class="table">
       <tr><th>Service</th><th>Duration</th><th>Price</th></tr>
       <tr><td>Single-Department Audit (Service OR Parts OR Rental)</td><td>1 day (8h)</td><td>$1,600</td></tr>
       <tr><td>Full Branch Audit (Service + Parts + Rental)</td><td>2 days (16h)</td><td>$3,200</td></tr>
@@ -589,19 +612,19 @@ body {
       <tr><td>Acquisition Due Diligence (EBITDA quality)</td><td>3-5 days</td><td>$4,800–$8,000</td></tr>
       <tr><td>Findings Report (always included)</td><td>—</td><td>Included</td></tr>
       <tr><td>Travel and lodging</td><td>—</td><td>Billed at actuals</td></tr>
-    </table>
+    </table></div>
     <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Custom scopes available. Deep historical audits (6+ months of trend data) available at additional cost.</p>
   </div>
 
   <div class="card" style="text-align:center;">
     <h2>Schedule an inspection</h2>
     <p>Book a 30-minute discovery call to discuss scope and timing.</p>
-    <a class="cta-btn" onclick="showSection('contact', this)">Get in Touch</a>
+    <a class="cta-btn" href="#sec-contact" onclick="showSection('contact'); return false;">Get in Touch</a>
   </div>
 </div>
 
 <!-- ===== TRAINING SECTION ===== -->
-<div class="section" id="sec-training">
+<div class="section" id="sec-training" role="tabpanel">
   <div class="hero">
     <h2>HEDS Operating Discipline Academy</h2>
     <p>Onsite training that installs the daily operating discipline to stop margin leakage. Position-specific tracks for every role in your dealership or rental company — service, parts, rental, branch, and executive. Your data. Your shop floor. Your people. Not a webinar. Not a book. Not a generic management seminar.</p>
@@ -632,14 +655,14 @@ body {
     <h2>Training Tracks</h2>
     <p>HEDS Academy offers 5 position-specific tracks. Each track is built around the daily behaviors that role owns. Every track starts with a financial foundation module so all participants speak the same language — then breaks into role-specific standards, scorecards, and floor exercises.</p>
 
-    <table class="table">
+    <div class="table-container"><table class="table">
       <tr><th>Track</th><th>Who It's For</th><th>Duration</th><th>Status</th></tr>
       <tr><td><strong>Service Operations Leadership</strong></td><td>Service Managers, Service Advisors, Shop Foremen, Service Administrators, Field Service Coordinators, Dispatch</td><td>5 days (40h)</td><td><span class="badge badge-green">Live</span></td></tr>
       <tr><td><strong>Parts &amp; Inventory Discipline</strong></td><td>Parts Managers, Warehouse Leads, Purchasing</td><td>3 days (24h)</td><td><span class="badge badge-gold">Available</span></td></tr>
       <tr><td><strong>Rental Fleet &amp; Uptime</strong></td><td>Rental Managers, Fleet Managers, Fleet Coordinators</td><td>3 days (24h)</td><td><span class="badge badge-gold">Available</span></td></tr>
       <tr><td><strong>Branch / Multi-Location Execution</strong></td><td>Branch Managers, District Managers, Multi-Location GMs</td><td>3 days (24h)</td><td><span class="badge badge-gold">Available</span></td></tr>
       <tr><td><strong>Regional &amp; Executive Leadership</strong></td><td>Regional Managers, Product Support Executives, Owners</td><td>2 days (16h)</td><td><span class="badge badge-gold">Available</span></td></tr>
-    </table>
+    </table></div>
     <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Mixed cohorts available — combine roles from service, parts, rental, and branch into one integrated session. Contact HEDS to discuss.</p>
   </div>
 
@@ -648,7 +671,7 @@ body {
     <h2>Track 1: Service Operations Leadership</h2>
     <p style="margin-bottom:16px;"><strong>For:</strong> Service Managers, Service Advisors, Shop Foremen, Service Administrators, Field Service Coordinators, Dispatch<br><strong>Duration:</strong> 5 days onsite (40 hours) | <strong>Price:</strong> $8,000 (up to 12 participants)</p>
     <p style="margin-bottom:16px;">Teaches service leaders to manage by daily habits — not month-end reports. By the time an accounting report shows a problem, the cash is already gone. This track connects what happens on the shop floor every day directly to the dealership or rental company's bottom line.</p>
-    <table class="table">
+    <div class="table-container"><table class="table">
       <tr><th>Module</th><th>Focus</th></tr>
       <tr><td>1 — ERP Report Mapping</td><td>How to pull exact reports from your DMS (Epicor, Texada, e-Emphasys) — find the right data, map it to the formulas</td></tr>
       <tr><td>2 — Absorption &amp; Margin</td><td>Service Gross Margin, Absorption Rate, Branch Fixed Overhead — the financial foundation every manager must know</td></tr>
@@ -670,9 +693,9 @@ body {
       <tr><td>18 — Customer Defection Warning</td><td>Service frequency tracking, 2x interval flag, advisor follow-up call assignment, retention protocol</td></tr>
       <tr><td>19 — Rental Fleet Health</td><td>PM compliance %, maintenance cost as % of OEC, rent-ready turnaround, downtime value tracking</td></tr>
       <tr><td>20 — 90-Day Action Plan (Capstone)</td><td>Written 90-day plan using your dealership or rental company data, signed and dated, 30/60/90 milestones, review commitment</td></tr>
-    </table>
+    </table></div>
     <div style="text-align:center;margin-top:16px;">
-      <a class="cta-btn" href="https://drlooper-bit.github.io/service-manager-training-dashboard/" target="_blank">View the Live Dashboard</a>
+      <a class="cta-btn" href="https://drlooper-bit.github.io/service-manager-training-dashboard/" target="_blank" rel="noopener noreferrer">View the Live Dashboard</a>
     </div>
   </div>
 
@@ -681,14 +704,14 @@ body {
     <h2>Track 2: Parts &amp; Inventory Discipline</h2>
     <p style="margin-bottom:16px;"><strong>For:</strong> Parts Managers, Warehouse Leads, Purchasing<br><strong>Duration:</strong> 3 days onsite (24 hours) | <strong>Price:</strong> $4,800 (up to 12 participants)</p>
     <p style="margin-bottom:16px;">Parts discipline is not about pricing strategy — it is about control. Fill rate drives service throughput. Dead stock ties up working capital. Receiving errors cause inventory adjustments that hide real losses. This track installs the daily rhythms that keep parts available and inventory clean.</p>
-    <table class="table">
+    <div class="table-container"><table class="table">
       <tr><th>Module</th><th>Focus</th></tr>
       <tr><td>1 — Parts Manager Finance &amp; Fill Rate</td><td>Fill-rate definition and measurement, stock vs. emergency order policy, vendor accountability scorecard, backorder drift limits</td></tr>
       <tr><td>2 — Physical Inventory &amp; Receiving Discipline</td><td>Physical inventory procedures, receiving checklist (PO match, put-away within 24h, BIN verification), controlled adjustment policy</td></tr>
       <tr><td>3 — Dead Stock &amp; Obsolescence Control</td><td>No-move identification, obsolescence review cadence, disposition options (return, scrap, bulk sale), ERP master-data cleanup</td></tr>
       <tr><td>4 — Parts Constraint Impact on Service &amp; Rental</td><td>How parts shortages block service bays and rent-ready status, cross-functional escalation, constraint impact dollar score</td></tr>
       <tr><td>5 — Purchasing &amp; Vendor Management Discipline</td><td>PO approval matrix by dollar tier, min/max and reorder point discipline, freight policy, return policy and vendor RMA process</td></tr>
-    </table>
+    </table></div>
     <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Core KPIs: Fill Rate %, Emergency Order Count, Backorder Aging, Inventory Adjustment $, Count Accuracy %, Dead Stock %, Inventory Turns, Parts Constraint Impact Score</p>
   </div>
 
@@ -697,14 +720,14 @@ body {
     <h2>Track 3: Rental Fleet &amp; Uptime</h2>
     <p style="margin-bottom:16px;"><strong>For:</strong> Rental Managers, Fleet Managers, Fleet Coordinators<br><strong>Duration:</strong> 3 days onsite (24 hours) | <strong>Price:</strong> $4,800 (up to 12 participants)</p>
     <p style="margin-bottom:16px;">The fleet is the revenue-generating asset. Every day a machine sits in the shop instead of on rent, the company loses the daily rental rate. This track installs the workflows that get machines back on rent fast — and keep them earning.</p>
-    <table class="table">
+    <div class="table-container"><table class="table">
       <tr><th>Module</th><th>Focus</th></tr>
       <tr><td>1 — Rent-Ready Workflow Design</td><td>Rent-ready checklist (mechanical, cosmetic, attachment, documentation), off-rent-to-repair trigger within 4 hours of return, repair planning alignment</td></tr>
       <tr><td>2 — Attachment &amp; Asset Control</td><td>Every attachment has ERP assignment, contract linkage, and condition photos at check-out and check-in, damage documentation, return inspection checklist</td></tr>
       <tr><td>3 — Maintenance Cost vs. OEC &amp; Telematics Alert Response</td><td>Maintenance cost benchmark as % of OEC by asset class, deferred maintenance exposure, telematics alert response protocol, mixed-OEM fault code framework</td></tr>
       <tr><td>4 — Downtime Value &amp; Fleet Earning Risk</td><td>Downtime value calculation (daily rental rate × expected rental days lost), fleet earning risk score, shop priority rule: highest downtime value wins the bay</td></tr>
       <tr><td>5 — Rental Rate &amp; Utilization Discipline</td><td>Rate review cadence and market benchmark, utilization floor rule, rental contract checklist (insurance, damage deposit, inspection photos, attachment list)</td></tr>
-    </table>
+    </table></div>
     <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Core KPIs: Rent-Ready Failure Risk, Off-Rent-to-Ready Time, Asset Availability %, Maintenance Cost as % of OEC, PM Compliance %, Dollar Utilization %, Downtime Value, Attachment Mismatch Count</p>
   </div>
 
@@ -713,14 +736,14 @@ body {
     <h2>Track 4: Branch / Multi-Location Execution</h2>
     <p style="margin-bottom:16px;"><strong>For:</strong> Branch Managers, District Managers, Multi-Location GMs<br><strong>Duration:</strong> 3 days onsite (24 hours) | <strong>Price:</strong> $4,800 (up to 12 participants)</p>
     <p style="margin-bottom:16px;">The branch manager role keeps expanding — more decisions, more departments, more pressure. This track installs the operating rhythm that makes service, parts, and rental line up under one branch scorecard with clear accountability.</p>
-    <table class="table">
+    <div class="table-container"><table class="table">
       <tr><th>Module</th><th>Focus</th></tr>
       <tr><td>1 — Branch Control Score Design</td><td>5-7 metric branch scorecard, metric selection rules (leading not vanity), red/yellow/green thresholds, one named owner per metric</td></tr>
       <tr><td>2 — Action Priority Board &amp; Escalation</td><td>Top 3-5 action items visible to all, 48-hour escalation rule, close proof required for every closed item</td></tr>
       <tr><td>3 — Cross-Functional Operating Review</td><td>Weekly 60-minute review with service, parts, rental, and finance in one room, blocker definition and ownership, resolution date committed before meeting ends</td></tr>
       <tr><td>4 — Safety, Role Clarity &amp; Accountability</td><td>5-minute daily safety briefing, role clarity matrix (name + function + decision authority + reporting line), accountability cascade for every metric</td></tr>
       <tr><td>5 — Coaching &amp; Change Execution</td><td>30-minute development conversation per direct report every two weeks, firefighting triage rule (if >20% time on reactive, delegate or systemize)</td></tr>
-    </table>
+    </table></div>
     <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Core KPIs: Branch Control Score Compliance, Action Item Closure Rate, Blocker Count/Week, Blocker Resolution Rate, Safety Incident Rate, Manager Coaching Compliance, Firefighting Time %</p>
   </div>
 
@@ -729,14 +752,14 @@ body {
     <h2>Track 5: Regional &amp; Executive Leadership</h2>
     <p style="margin-bottom:16px;"><strong>For:</strong> Regional Managers, Product Support Executives, Owners, PE Operating Partners<br><strong>Duration:</strong> 2 days onsite (16 hours) | <strong>Price:</strong> $3,200 (up to 12 participants)</p>
     <p style="margin-bottom:16px;">This track is not about operational tactics — it is about translating branch-level behavior into portfolio-level margin and valuation protection. For multi-location groups, PE-backed dealers, and ownership teams preparing for acquisition or sale.</p>
-    <table class="table">
+    <div class="table-container"><table class="table">
       <tr><th>Module</th><th>Focus</th></tr>
       <tr><td>1 — Enterprise Operating Risk Score</td><td>Weighted risk score combining WIP aging, parts fill, rent-ready, labor recovery, and scorecard compliance across all branches, branch risk ranking, red-flag threshold</td></tr>
       <tr><td>2 — Working-Capital Drag Anatomy</td><td>Working-capital components (aged WIP, AR days, inventory value, underutilized fleet), total dollar drag vs. EBITDA, cash-release targets by component</td></tr>
       <tr><td>3 — EBITDA Quality &amp; Due-Diligence Assessment</td><td>Recurring vs. non-recurring earnings, normalization checklist (owner expenses, one-time maintenance, rent allocations), due-diligence readiness standard</td></tr>
       <tr><td>4 — Coaching Local Managers &amp; Change Execution</td><td>Manager coaching rhythm, change execution playbook (communicate why → install standard → coach behavior → measure metric → remove blocker)</td></tr>
       <tr><td>5 — Post-Acquisition Stabilization &amp; PE Overlay</td><td>First 30/60/90-day priorities after ownership change, PE reporting standards, management retention plan, EBITDA stabilization trajectory</td></tr>
-    </table>
+    </table></div>
     <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Core KPIs: Enterprise Operating Risk Score, Branch Risk Ranking Delta, Working-Capital Drag $, Cash Released MoM, EBITDA Quality Score, Due-Diligence Readiness Time, Manager Coaching Compliance, Key Manager Retention Rate</p>
   </div>
 
@@ -788,7 +811,7 @@ body {
   <div class="card">
     <h2>Pricing</h2>
     <p>All pricing built from a $200/hour labor rate.</p>
-    <table class="table">
+    <div class="table-container"><table class="table">
       <tr><th>Package</th><th>What It Is</th><th>Duration</th><th>Participants</th><th>Price</th></tr>
       <tr><td><strong>A — 5-Day Onsite Intensive</strong></td><td>The full flagship program. All 20 modules delivered onsite at your dealership or rental company over 5 consecutive days. Includes interactive dashboard, 50-question assessment, 90-day action plan, and certificate of completion. Built around your actual ERP data on your shop floor.</td><td>5 days (40h)</td><td>Up to 12</td><td><strong>$8,000</strong></td></tr>
       <tr><td><strong>B — Assessment Only</strong></td><td>A standalone 50-question timed test for dealerships or rental companies that want to benchmark their managers' industry knowledge without the full onsite program. Includes score report, module-by-module breakdown, and focus area recommendations. No training — just the diagnostic.</td><td>90 minutes</td><td>Up to 25</td><td><strong>$300/person</strong></td></tr>
@@ -796,13 +819,13 @@ body {
       <tr><td><strong>D — Follow-Up Coaching</strong></td><td>Virtual coaching sessions purchased after any onsite engagement when specific performance gaps are identified. Each session targets 2-3 stalled metrics with pre-session data review and action items. Not bundled — triggered by actual numbers not improving, not a fixed calendar.</td><td>1.5h/session</td><td>1/session</td><td><strong>$300/session</strong></td></tr>
       <tr><td><strong>E — Train-the-Trainer</strong></td><td>A premium add-on for multi-branch groups that want to cascade HEDS standards internally. 2 additional onsite days where HEDS shadows and certifies your internal facilitators to deliver the program at other locations. Includes facilitator manual and master deck license. Requires completing Package A or C first.</td><td>2 days (16h)</td><td>Up to 3</td><td><strong>$3,200 + $300/facilitator</strong></td></tr>
       <tr><td><strong>F — Regional Roll-Out</strong></td><td>Full program delivered at each branch location over 4-8 weeks for dealer groups with 3+ sites. Includes shared pre-work dashboard, cross-site scorecard comparison, and consolidated regional summary. Ensures consistent operating standards across all locations.</td><td>5 days/site</td><td>Up to 12/site</td><td><strong>$8,000/site</strong></td></tr>
-    </table>
+    </table></div>
     <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Add-ons available: additional participants ($300), additional days ($1,600), custom playbook ($1,600), ERP mapping ($800), printed workbooks ($25/person), travel at actuals.</p>
   </div>
 
   <div class="card">
     <h2>How It Compares</h2>
-    <table class="compare-table">
+    <div class="table-container"><table class="compare-table">
       <tr>
         <th>Program</th>
         <th>Onsite?</th>
@@ -817,20 +840,20 @@ body {
       <tr><td>NADA ($2,995)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
       <tr><td>AEDF ($2,995/person)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td></tr>
       <tr><td>Service Drive (~$730)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td></tr>
-      <tr class="hedss-row"><td><strong>HEDS Academy ($8,000)</strong></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
-    </table>
+      <tr class="heds-row"><td><strong>HEDS Academy ($8,000)</strong></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+    </table></div>
     <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">At 12 participants: $667/person — less than half the cheapest online competitor, delivered onsite with real data.</p>
   </div>
 
   <div class="card" style="text-align:center;">
     <h2>Ready to train your team?</h2>
     <p>Book a 30-minute discovery call. We'll review your operation and recommend where to start.</p>
-    <a class="cta-btn" onclick="showSection('contact', this)">Get in Touch</a>
+    <a class="cta-btn" href="#sec-contact" onclick="showSection('contact'); return false;">Get in Touch</a>
   </div>
 </div>
 
 <!-- ===== CONTACT SECTION ===== -->
-<div class="section" id="sec-contact">
+<div class="section" id="sec-contact" role="tabpanel">
   <div class="hero">
     <h2>Let's Talk</h2>
     <p>Book a 30-minute discovery call. We'll review what's happening in your operation and recommend where to start — whether that's an inspection, training, or both.</p>
@@ -865,13 +888,13 @@ body {
 
   <div class="card">
     <h2>Service Lines</h2>
-    <table class="table">
+    <div class="table-container"><table class="table">
       <tr><th>Service</th><th>What It Does</th><th>Starting At</th></tr>
       <tr><td><strong>Due Diligence &amp; Inspections</strong></td><td>Onsite audit that finds the dollar leaks</td><td>$1,600 (1-day, single department)</td></tr>
       <tr><td><strong>Training &amp; Academy</strong></td><td>5-day onsite program that installs the discipline</td><td>$8,000 (5-day, up to 12 participants)</td></tr>
       <tr><td><strong>Follow-Up Coaching</strong></td><td>Virtual sessions targeting specific stalled metrics</td><td>$300/session</td></tr>
       <tr><td><strong>Acquisition Due Diligence</strong></td><td>EBITDA quality and operational risk assessment</td><td>$4,800–$8,000</td></tr>
-    </table>
+    </table></div>
     <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">All pricing built from a $200/hour labor rate. Travel billed at actuals.</p>
   </div>
 
@@ -883,23 +906,40 @@ body {
 </div>
 
 <!-- ===== FOOTER ===== -->
-<div class="footer">
-  <img src="LOGO_HEDS.png" alt="HEDS" onerror="this.style.display='none'">
+<footer class="footer">
+  <img src="LOGO_HEDS_small.png" alt="HEDS" width="48" height="48" onerror="this.style.display='none'">
   <p><strong style="color:var(--accent);">HEDS</strong> — Heavy Equipment Dealer Solutions</p>
-  <p>Leesburg, Florida &nbsp;|&nbsp; daniel@hedsconsulting.net &nbsp;|&nbsp; 813-599-7893</p>
+  <p>Leesburg, Florida &nbsp;|&nbsp; <a href="mailto:daniel@hedsconsulting.net" style="color:var(--muted);text-decoration:none;">daniel@hedsconsulting.net</a> &nbsp;|&nbsp; <a href="tel:8135997893" style="color:var(--muted);text-decoration:none;">813-599-7893</a></p>
   <p style="margin-top:8px;opacity:0.5;">© 2026 HEDS. All rights reserved.</p>
-</div>
+</footer>
 
 <script>
 function showSection(secId, btn) {
+  var targetSection = document.getElementById('sec-' + secId);
+  if (!targetSection) return;
+  
+  // Toggle active section
   document.querySelectorAll('.section').forEach(function(el) {
     el.classList.remove('active');
   });
+  targetSection.classList.add('active');
+  
+  // Toggle active tab button by matching section ID
   document.querySelectorAll('.tab-btn').forEach(function(el) {
     el.classList.remove('active');
+    el.setAttribute('aria-selected', 'false');
   });
-  document.getElementById('sec-' + secId).classList.add('active');
-  if (btn) btn.classList.add('active');
+  // Find the tab button that corresponds to this section
+  var tabBtns = document.querySelectorAll('.tab-btn');
+  for (var i = 0; i < tabBtns.length; i++) {
+    var onclickAttr = tabBtns[i].getAttribute('onclick') || '';
+    if (onclickAttr.indexOf("'" + secId + "'") !== -1) {
+      tabBtns[i].classList.add('active');
+      tabBtns[i].setAttribute('aria-selected', 'true');
+      break;
+    }
+  }
+  
   window.scrollTo(0, 0);
 }
 </script>

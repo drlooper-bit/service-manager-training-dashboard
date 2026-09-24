@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://drlooper-bit.github.io/service-manager-training-dashboard/heds-media-dashboard.html">
 <meta property="og:image" content="https://drlooper-bit.github.io/service-manager-training-dashboard/LOGO_HEDS.png">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HEDS — Heavy Equipment Dealer Solutions LLC">
 <meta name="twitter:description" content="We find the money your operation is losing or overlooking — and install the discipline to keep the bottlenecks from coming back.">
 <meta name="twitter:image" content="https://drlooper-bit.github.io/service-manager-training-dashboard/LOGO_HEDS.png">
@@ -413,7 +413,9 @@ body {
 <!-- ===== HEADER + NAV (sticky group) ===== -->
 <div class="site-header-group">
 <header class="header">
-  <img src="LOGO_HEDS_small.png" alt="HEDS Logo" width="64" height="64" class="header-logo" onclick="showSection('overview')" onerror="this.style.display='none'">
+  <a href="#sec-overview" onclick="showSection('overview'); return false;" aria-label="Go to Overview">
+    <img src="LOGO_HEDS_small.png" alt="HEDS Logo" width="64" height="64" class="header-logo" onerror="this.style.display='none'">
+  </a>
   <div class="header-text">
     <h1>HEDS</h1>
     <p>Heavy Equipment Dealer Solutions LLC</p>
@@ -907,7 +909,7 @@ body {
 
 <!-- ===== FOOTER ===== -->
 <footer class="footer">
-  <img src="LOGO_HEDS_small.png" alt="HEDS" width="48" height="48" onerror="this.style.display='none'">
+  <img src="LOGO_HEDS_small.png" alt="HEDS" width="48" height="48" loading="lazy" onerror="this.style.display='none'">
   <p><strong style="color:var(--accent);">HEDS</strong> — Heavy Equipment Dealer Solutions LLC</p>
   <p>Leesburg, Florida &nbsp;|&nbsp; <a href="mailto:daniel@hedsconsulting.net" style="color:var(--muted);text-decoration:none;">daniel@hedsconsulting.net</a> &nbsp;|&nbsp; <a href="tel:8135997893" style="color:var(--muted);text-decoration:none;">813-599-7893</a></p>
   <p style="margin-top:8px;opacity:0.5;">© 2026 HEDS. All rights reserved.</p>
@@ -936,12 +938,33 @@ function showSection(secId, btn) {
     if (onclickAttr.indexOf("'" + secId + "'") !== -1) {
       tabBtns[i].classList.add('active');
       tabBtns[i].setAttribute('aria-selected', 'true');
+      tabBtns[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       break;
     }
   }
   
+  // Sync URL hash for deep linking and back/forward
+  if (history.replaceState) {
+    history.replaceState(null, '', '#' + secId);
+  }
   window.scrollTo(0, 0);
 }
+
+// Support direct link to tabs on page load
+window.addEventListener('DOMContentLoaded', function() {
+  var hash = window.location.hash.replace('#', '');
+  if (hash && document.getElementById('sec-' + hash)) {
+    showSection(hash);
+  }
+});
+
+// Support browser back/forward buttons
+window.addEventListener('popstate', function() {
+  var hash = window.location.hash.replace('#', '') || 'overview';
+  if (document.getElementById('sec-' + hash)) {
+    showSection(hash);
+  }
+});
 </script>
 
 </body>

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HEDS — Heavy Equipment Dealer Solutions</title>
+<meta name="description" content="HEDS finds the money your dealership is losing and installs the daily discipline to keep it from coming back. Due diligence inspections, onsite training, and performance coaching for heavy equipment dealerships.">
+<style>
+:root {
+  --bg: #0a1f44;
+  --bg-dark: #061529;
+  --bg-light: #152847;
+  --card-bg: #152847;
+  --border: #203b60;
+  --fg: #f8fafc;
+  --muted: #94a3b8;
+  --accent: #f2a900;
+  --accent-hover: #ffc72c;
+  --gold: #f2a900;
+  --gold-light: #ffc72c;
+  --navy: #00205B;
+  --grey: #8C8C8C;
+  --success: #22c55e;
+  --danger: #ef4444;
+  --radius: 8px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg-dark);
+  color: var(--fg);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  background: var(--bg);
+  border-bottom: 3px solid var(--accent);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+.header-logo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 50%;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+.header-logo:hover { transform: scale(1.05); }
+
+.header-text { flex: 1; }
+.header-text h1 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+.header-text p {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 2px;
+}
+
+/* ===== TAB NAV ===== */
+.tab-nav {
+  display: flex;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  position: sticky;
+  top: 104px;
+  z-index: 99;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  padding: 16px 24px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  font-family: var(--font);
+}
+.tab-btn:hover { color: var(--fg); }
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ===== SECTIONS ===== */
+.section { display: none; padding: 24px 20px; max-width: 900px; margin: 0 auto; }
+.section.active { display: block; }
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.card h2 {
+  font-size: 1.3rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.card h3 {
+  font-size: 1.1rem;
+  color: var(--fg);
+  margin-bottom: 8px;
+}
+.card p { color: var(--muted); margin-bottom: 12px; }
+.card ul { list-style: none; padding: 0; }
+.card li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: var(--fg);
+}
+.card li:last-child { border-bottom: none; }
+.card li::before { content: "▸ "; color: var(--accent); font-weight: bold; }
+
+/* ===== HERO ===== */
+.hero {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-light) 100%);
+  border-radius: var(--radius);
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+.hero h2 {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+.hero p {
+  font-size: 1.1rem;
+  color: var(--fg);
+  max-width: 600px;
+  margin: 0 auto 20px;
+}
+
+/* ===== STAT ROW ===== */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 12px;
+  text-align: center;
+}
+.stat-num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  display: block;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ===== SERVICE CARDS ===== */
+.service-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+@media (min-width: 700px) {
+  .service-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.service-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+.service-card:hover { border-color: var(--accent); }
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+.service-card h3 {
+  font-size: 1.2rem;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.service-card p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 16px;
+}
+
+/* ===== TABLES ===== */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: 0.9rem;
+}
+.table th {
+  background: var(--bg);
+  color: var(--accent);
+  padding: 12px 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--border);
+}
+.table td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  color: var(--fg);
+}
+.table tr:hover td { background: rgba(242,169,0,0.05); }
+
+/* ===== BADGES ===== */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.badge-gold { background: rgba(242,169,0,0.15); color: var(--accent); border: 1px solid rgba(242,169,0,0.3); }
+.badge-green { background: rgba(34,197,94,0.15); color: var(--success); border: 1px solid rgba(34,197,94,0.3); }
+.badge-grey { background: rgba(148,163,184,0.15); color: var(--muted); border: 1px solid rgba(148,163,184,0.3); }
+
+/* ===== CTA BUTTON ===== */
+.cta-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--bg-dark);
+  padding: 14px 32px;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.2s;
+}
+.cta-btn:hover { background: var(--accent-hover); }
+
+.cta-secondary {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+}
+.cta-secondary:hover { color: var(--accent); }
+
+/* ===== CONTACT ===== */
+.contact-block {
+  text-align: center;
+  padding: 40px 20px;
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  font-size: 1.1rem;
+}
+.contact-item a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.contact-item a:hover { text-decoration: underline; }
+
+/* ===== COMPARISON ===== */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+.compare-table th {
+  background: var(--bg);
+  color: var(--accent);
+  padding: 10px 6px;
+  text-align: center;
+}
+.compare-table th:first-child { text-align: left; }
+.compare-table td {
+  padding: 8px 6px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.compare-table td:first-child { text-align: left; color: var(--fg); }
+.compare-table .yes { color: var(--success); font-weight: bold; }
+.compare-table .no { color: var(--danger); }
+.compare-table .heds-row { background: rgba(242,169,0,0.08); }
+.compare-table .heds-row td { color: var(--accent); font-weight: 600; }
+
+/* ===== FOOTER ===== */
+.footer {
+  text-align: center;
+  padding: 24px 20px;
+  border-top: 1px solid var(--border);
+  margin-top: 40px;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.footer img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  margin: 24px 0;
+  opacity: 0.3;
+}
+
+/* ===== PROCESS STEPS ===== */
+.process {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+.process-step {
+  flex: 1;
+  min-width: 180px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+.step-num {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  background: var(--accent);
+  color: var(--bg-dark);
+  border-radius: 50%;
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+.process-step h4 { color: var(--accent); margin-bottom: 6px; font-size: 0.95rem; }
+.process-step p { color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <img src="LOGO_HEDS.png" alt="HEDS Logo" class="header-logo" onclick="showSection('overview', this)" onerror="this.style.display='none'">
+  <div class="header-text">
+    <h1>HEDS</h1>
+    <p>Heavy Equipment Dealer Solutions</p>
+  </div>
+</div>
+
+<!-- ===== TAB NAV ===== -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showSection('overview', this)">Overview</button>
+  <button class="tab-btn" onclick="showSection('diligence', this)">Due Diligence &amp; Inspections</button>
+  <button class="tab-btn" onclick="showSection('training', this)">Training &amp; Academy</button>
+  <button class="tab-btn" onclick="showSection('contact', this)">Contact</button>
+</div>
+
+<!-- ===== OVERVIEW SECTION ===== -->
+<div class="section active" id="sec-overview">
+  <div class="hero">
+    <h2>We find the money your dealership is losing — and install the discipline to keep it from coming back.</h2>
+    <p>HEDS is a heavy equipment dealership services firm serving dealers, rental companies, and equipment groups across the United States. We combine onsite operational audits with hands-on management training to stop margin leakage where it starts — on the shop floor.</p>
+  </div>
+
+  <div class="service-grid">
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <h3>Due Diligence &amp; Inspections</h3>
+      <p>Onsite operational audits that find the dollar leaks in your service, parts, and rental departments. We walk your floor, pull your ERP reports, and show you exactly where the cash is leaving.</p>
+      <a class="cta-secondary" onclick="showSection('diligence', this)">Learn More →</a>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🎓</div>
+      <h3>Training &amp; Academy</h3>
+      <p>Onsite training that installs the daily operating discipline to stop the leaks from coming back. 5 days at your dealership with your real data, your people, and your shop floor.</p>
+      <a class="cta-secondary" onclick="showSection('training', this)">Learn More →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>What Makes HEDS Different</h2>
+    <ul>
+      <li><strong>Onsite, not online.</strong> We come to your dealership. We walk your shop. We pull your actual ERP reports. No webinars. No generic examples.</li>
+      <li><strong>Your real data, not sample data.</strong> Every audit and every training module uses your actual WIP, your labor numbers, your parts fill rate, your rental fleet status.</li>
+      <li><strong>Daily discipline, not monthly reports.</strong> By the time an accounting report shows a problem, the cash is already gone. We install daily and weekly rhythms that catch leaks before they hit the P&L.</li>
+      <li><strong>Industry-specific.</strong> Built from multi-location product support leadership across heavy equipment dealerships and rental operations. Not generic management consulting.</li>
+      <li><strong>Transparent pricing.</strong> $200/hour labor rate. Every package is built from that single number. No hidden fees, no bundled services you don't need.</li>
+    </ul>
+  </div>
+
+  <div class="stats">
+    <div class="stat-box"><span class="stat-num">20</span><span class="stat-label">Training Modules</span></div>
+    <div class="stat-box"><span class="stat-num">10</span><span class="stat-label">Live Calculators</span></div>
+    <div class="stat-box"><span class="stat-num">50</span><span class="stat-label">Assessment Questions</span></div>
+    <div class="stat-box"><span class="stat-num">5</span><span class="stat-label">Days Onsite</span></div>
+    <div class="stat-box"><span class="stat-num">$200</span><span class="stat-label">Hourly Rate</span></div>
+    <div class="stat-box"><span class="stat-num">12</span><span class="stat-label">Max Cohort</span></div>
+  </div>
+
+  <div class="card">
+    <h2>Who HEDS Serves</h2>
+    <p>Heavy equipment dealerships, rental companies, and equipment groups with:</p>
+    <ul>
+      <li>Aged WIP draining cash flow</li>
+      <li>Labor recovery gaps — technicians paid for hours not billed</li>
+      <li>Parts fill rate problems and dead stock accumulation</li>
+      <li>Rental fleet downtime eating utilization targets</li>
+      <li>Inconsistent branch practices across multiple locations</li>
+      <li>Managers who know the numbers but struggle to turn them into daily action</li>
+      <li>PE-backed equipment groups needing operational due diligence before or after acquisition</li>
+    </ul>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>Ready to find the money your dealership is losing?</h2>
+    <p>Book a 30-minute discovery call. We'll review what's happening and recommend where to start.</p>
+    <a class="cta-btn" onclick="showSection('contact', this)">Get in Touch</a>
+  </div>
+</div>
+
+<!-- ===== DUE DILIGENCE SECTION ===== -->
+<div class="section" id="sec-diligence">
+  <div class="hero">
+    <h2>Due Diligence &amp; Operational Inspections</h2>
+    <p>We walk your floor, pull your ERP reports, and show you exactly where the cash is leaving. Not a desktop review — a full onsite operational audit of your service, parts, and rental departments.</p>
+  </div>
+
+  <div class="card">
+    <h2>What We Audit</h2>
+    <div class="service-grid">
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent);">Service Department</h3>
+        <ul style="font-size:0.9rem;">
+          <li>WIP aging and days-to-invoice</li>
+          <li>Labor recovery and unbilled hours</li>
+          <li>Effective labor rate vs. posted rate</li>
+          <li>Quote follow-up and close rate</li>
+          <li>Warranty recovery rate</li>
+          <li>First-time fix rate</li>
+          <li>Absorption contribution</li>
+        </ul>
+      </div>
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent);">Parts Department</h3>
+        <ul style="font-size:0.9rem;">
+          <li>Fill rate and backorder exposure</li>
+          <li>Dead stock and aging inventory</li>
+          <li>Stock order vs. emergency order ratio</li>
+          <li>Gross profit margin on parts</li>
+          <li>Bin accuracy and receiving discipline</li>
+          <li>Physical inventory procedures</li>
+          <li>Master data cleanliness in ERP</li>
+        </ul>
+      </div>
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent);">Rental Fleet</h3>
+        <ul style="font-size:0.9rem;">
+          <li>Time utilization rate</li>
+          <li>Dollar utilization rate</li>
+          <li>Off-rent turnaround time</li>
+          <li>Downtime percentage</li>
+          <li>Maintenance cost as % of OEC</li>
+          <li>PM compliance rate</li>
+          <li>Rent-ready status accuracy</li>
+        </ul>
+      </div>
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent);">Branch Operations</h3>
+        <ul style="font-size:0.9rem;">
+          <li>Absorption rate (Service + Parts + Rental GP ÷ Fixed Overhead)</li>
+          <li>Cross-functional accountability</li>
+          <li>Daily operating rhythms</li>
+          <li>Scorecard discipline and review cadence</li>
+          <li>Working capital tied up in WIP and inventory</li>
+          <li>EBITDA quality and normalized margin</li>
+          <li>Branch-to-branch consistency</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>How the Inspection Works</h2>
+    <div class="process">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h4>Pre-Work</h4>
+        <p>Client pulls 4 standard ERP/DMS reports. HEDS builds a baseline snapshot before arriving onsite.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h4>Onsite Audit</h4>
+        <p>1-3 days onsite. Shop floor walk, parts counter review, rental yard inspection, ERP report verification, manager interviews.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h4>Findings Report</h4>
+        <p>Detailed report with dollar-quantified leaks, prioritized fix list, and recommended next steps. Delivered within 5 business days.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>What You Get</h2>
+    <ul>
+      <li>Operational findings report with dollar-quantified revenue leaks</li>
+      <li>Department-by-department scorecard showing current state vs. industry benchmarks</li>
+      <li>Prioritized fix list ranked by dollar impact and ease of implementation</li>
+      <li>WIP aging analysis with specific hold reasons and dollar exposure</li>
+      <li>Labor reconciliation showing unbilled hours and dollar exposure</li>
+      <li>Parts inventory health snapshot (fill rate, dead stock, aging)</li>
+      <li>Rental fleet utilization and downtime analysis</li>
+      <li>Recommendation for training engagement if behavioral gaps are driving the leaks</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>EBITDA Quality &amp; Acquisition Due Diligence</h2>
+    <p>For PE-backed equipment groups, dealers, or rental companies evaluating an acquisition or preparing for sale:</p>
+    <ul>
+      <li>Normalized EBITDA quality assessment — are the earnings real or are they inflated by deferred maintenance and WIP leakage?</li>
+      <li>Working capital analysis — how much cash is trapped in aged WIP and dead inventory?</li>
+      <li>Operational risk scoring across service, parts, and rental departments</li>
+      <li>Post-acquisition integration plan — what to fix first and in what order</li>
+      <li>Branch-level consistency audit — are all locations operating to the same standard?</li>
+      <li>Management capability assessment — can the current team execute the plan?</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Pricing</h2>
+    <p>All pricing built from a $200/hour labor rate. Inspections are scoped based on dealership size and number of departments audited.</p>
+    <table class="table">
+      <tr><th>Service</th><th>Duration</th><th>Price</th></tr>
+      <tr><td>Single-Department Audit (Service OR Parts OR Rental)</td><td>1 day (8h)</td><td>$1,600</td></tr>
+      <tr><td>Full Branch Audit (Service + Parts + Rental)</td><td>2 days (16h)</td><td>$3,200</td></tr>
+      <tr><td>Multi-Branch Audit (3+ locations)</td><td>1-2 days/site</td><td>$1,600–$3,200/site</td></tr>
+      <tr><td>Acquisition Due Diligence (EBITDA quality)</td><td>3-5 days</td><td>$4,800–$8,000</td></tr>
+      <tr><td>Findings Report (always included)</td><td>—</td><td>Included</td></tr>
+      <tr><td>Travel and lodging</td><td>—</td><td>Billed at actuals</td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Custom scopes available. Deep historical audits (6+ months of trend data) available at additional cost.</p>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>Schedule an inspection</h2>
+    <p>Book a 30-minute discovery call to discuss scope and timing.</p>
+    <a class="cta-btn" onclick="showSection('contact', this)">Get in Touch</a>
+  </div>
+</div>
+
+<!-- ===== TRAINING SECTION ===== -->
+<div class="section" id="sec-training">
+  <div class="hero">
+    <h2>HEDS Operating Discipline Academy</h2>
+    <p>Onsite training that installs the daily operating discipline to stop margin leakage. 5 days at your dealership. Your data. Your shop floor. Your people. Not a webinar. Not a book. Not a generic management seminar.</p>
+  </div>
+
+  <div class="card">
+    <h2>How It Works</h2>
+    <div class="process">
+      <div class="process-step">
+        <div class="step-num">1</div>
+        <h4>Pre-Work</h4>
+        <p>You pull 4 standard ERP reports. HEDS builds your baseline operational snapshot. Participants get a current-state scorecard before training starts.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">2</div>
+        <h4>5 Days Onsite</h4>
+        <p>20 modules over 5 days — 4 per day. Classroom + shop floor + live process work using your actual dealership data. Every formula, every example, every exercise uses your numbers.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">3</div>
+        <h4>90-Day Plan</h4>
+        <p>Each participant builds a written 90-day action plan from their own operational data. Signed, dated, and committed to review. Days 1-30 install rhythm, 31-60 fix leaks, 61-90 sustain.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>The 5-Day Curriculum</h2>
+    <table class="table">
+      <tr><th>Day</th><th>Module</th><th>Focus</th></tr>
+      <tr><td rowspan="4"><strong>Day 1</strong><br><span style="font-size:0.75rem;color:var(--muted);">Foundation &amp; Reporting</span></td><td>1 — ERP Report Mapping</td><td>How to pull exact reports from your DMS (Epicor, Texada, e-Emphasys)</td></tr>
+      <tr><td>2 — Absorption &amp; Margin</td><td>Service Gross Margin, Absorption Rate, Branch Fixed Overhead</td></tr>
+      <tr><td>3 — Labor Reconciliation</td><td>Productivity vs. Efficiency, billed vs. paid hours, unbilled labor exposure</td></tr>
+      <tr><td>4 — WIP &amp; Quote Control</td><td>WIP aging, Days to Invoice, Quote Revenue Risk, 48-hour close standard</td></tr>
+      <tr><td rowspan="4"><strong>Day 2</strong><br><span style="font-size:0.75rem;color:var(--muted);">Execution &amp; Pricing</span></td><td>5 — Efficiency &amp; Capacity</td><td>Shop labor capacity, multi-job queue rule, parts staging, dispatch matching</td></tr>
+      <tr><td>6 — ELR &amp; Discounting</td><td>Effective Labor Rate, posted vs. collected, unauthorized discount tracking</td></tr>
+      <tr><td>7 — Triage &amp; Dispatch</td><td>Intake standards, Four C's (Complaint, Cause, Correction, Coverage)</td></tr>
+      <tr><td>8 — Warranty Recovery</td><td>OEM warranty claim timing, documentation, recovery rate, denied claim prevention</td></tr>
+      <tr><td rowspan="4"><strong>Day 3</strong><br><span style="font-size:0.75rem;color:var(--muted);">Management Systems</span></td><td>9 — Leak Diagnostic Matrix</td><td>Connect each KPI to the floor behavior causing the leak, dollar-impact ranking</td></tr>
+      <tr><td>10 — Scorecards</td><td>Daily scorecard (5 metrics, end-of-shift), weekly scorecard (WIP, billed hours, ELR)</td></tr>
+      <tr><td>11 — Morning Standup</td><td>10-minute daily standup, capacity stress flag, one-decision minimum</td></tr>
+      <tr><td>12 — Weekly WIP Review</td><td>30-minute weekly session, decision tree for WOs over 14 days, close-or-kill</td></tr>
+      <tr><td rowspan="4"><strong>Day 4</strong><br><span style="font-size:0.75rem;color:var(--muted);">Process &amp; People</span></td><td>13 — Work Order Lifecycle</td><td>5-step lifecycle: intake, dispatch, parts staging, final review, pickup</td></tr>
+      <tr><td>14 — Expense &amp; Margin Recovery</td><td>Shop supply fees, environmental fees, freight — charge every time, every invoice</td></tr>
+      <tr><td>15 — Accountability &amp; Leadership</td><td>3-question weekly check-in, performance conversations, accountability cascade</td></tr>
+      <tr><td>16 — Forecasting &amp; Leading Indicators</td><td>Leading vs. lagging, 2-week capacity forecast, backorder trend, stress flags</td></tr>
+      <tr><td rowspan="4"><strong>Day 5</strong><br><span style="font-size:0.75rem;color:var(--muted);">Retention &amp; Capstone</span></td><td>17 — Telematics &amp; Machine Triage</td><td>Fault code alert response, named owners, PM scheduling from telematics</td></tr>
+      <tr><td>18 — Customer Defection Warning</td><td>Service frequency tracking, 2x interval flag, advisor follow-up assignment</td></tr>
+      <tr><td>19 — Rental Fleet Health</td><td>PM compliance, maintenance cost as % of OEC, rent-ready turnaround</td></tr>
+      <tr><td>20 — 90-Day Action Plan (Capstone)</td><td>Written plan from your data, signed and dated, 30/60/90 milestones</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Interactive Operating Dashboard</h2>
+    <p>Every participant gets access to the HEDS Service Manager Interactive Operating Dashboard — a browser-based tool used during training and kept after. No software install. Works on any device.</p>
+    <div class="service-grid">
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent);">Training Curriculum</h3>
+        <p style="font-size:0.9rem;">All 20 modules with worked examples using [YOUR NUMBER HERE] placeholders. Available for reference after training.</p>
+      </div>
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent);">10 Live Calculators</h3>
+        <p style="font-size:0.9rem;">Enter your dealership's actual numbers and see results in real time: Absorption, Gross Margin, WIP Aging, ELR, Tech Efficiency, Quote Risk, Leak Diagnostic, and more.</p>
+      </div>
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent);">50-Question Assessment</h3>
+        <p style="font-size:0.9rem;">90-minute timed test. Access code required. Tests industry knowledge, not HEDS methodology. Score, module breakdown, and focus area recommendations.</p>
+      </div>
+      <div class="service-card" style="text-align:left;">
+        <h3 style="color:var(--accent);">Executive Scorecard</h3>
+        <p style="font-size:0.9rem;">10-metric dashboard with PASS/WARN/FAIL status. Data persists in browser localStorage — no cloud, no login, no data sent anywhere.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:16px;">
+      <a class="cta-btn" href="https://drlooper-bit.github.io/service-manager-training-dashboard/" target="_blank">View the Live Dashboard</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Who Should Attend</h2>
+    <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;">
+      <span class="badge badge-gold">Service Managers</span>
+      <span class="badge badge-gold">Service Advisors</span>
+      <span class="badge badge-gold">Shop Foremen</span>
+      <span class="badge badge-gold">Service Administrators</span>
+      <span class="badge badge-gold">Field Service Coordinators</span>
+      <span class="badge badge-gold">Dispatch</span>
+    </div>
+    <p style="font-size:0.9rem;">Maximum cohort: 12 participants per session.</p>
+  </div>
+
+  <div class="card">
+    <h2>What Participants Get</h2>
+    <ul>
+      <li>Interactive Operating Dashboard (browser-based, kept after training)</li>
+      <li>20-module training curriculum with worked examples</li>
+      <li>50-question assessment with score, module breakdown, and focus areas</li>
+      <li>90-day action plan built from their actual dealership data</li>
+      <li>Certificate of completion</li>
+      <li>13 implementation templates (scorecards, checklists, decision trees)</li>
+      <li>Follow-up coaching available separately (performance-triggered, not bundled)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Pricing</h2>
+    <p>All pricing built from a $200/hour labor rate.</p>
+    <table class="table">
+      <tr><th>Package</th><th>Duration</th><th>Participants</th><th>Price</th></tr>
+      <tr><td><strong>A — 5-Day Onsite Intensive</strong><br><span style="font-size:0.8rem;color:var(--muted);">Full 20-module program</span></td><td>5 days (40h)</td><td>Up to 12</td><td><strong>$8,000</strong></td></tr>
+      <tr><td><strong>B — Assessment Only</strong><br><span style="font-size:0.8rem;color:var(--muted);">Standalone test</span></td><td>90 minutes</td><td>Up to 25</td><td><strong>$300/person</strong></td></tr>
+      <tr><td><strong>C — 3-Day Single-Track</strong><br><span style="font-size:0.8rem;color:var(--muted);">Focused on one area</span></td><td>3 days (24h)</td><td>Up to 12</td><td><strong>$4,800</strong></td></tr>
+      <tr><td><strong>D — Follow-Up Coaching</strong><br><span style="font-size:0.8rem;color:var(--muted);">Optional, performance-triggered</span></td><td>1.5h/session</td><td>1/session</td><td><strong>$300/session</strong></td></tr>
+      <tr><td><strong>E — Train-the-Trainer</strong><br><span style="font-size:0.8rem;color:var(--muted);">Certify internal facilitators</span></td><td>2 days (16h)</td><td>Up to 3</td><td><strong>$3,200 + $300/facilitator</strong></td></tr>
+      <tr><td><strong>F — Regional Roll-Out</strong><br><span style="font-size:0.8rem;color:var(--muted);">Multi-branch, consistent standards</span></td><td>5 days/site</td><td>Up to 12/site</td><td><strong>$8,000/site</strong></td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">Add-ons available: additional participants ($300), additional days ($1,600), custom playbook ($1,600), ERP mapping ($800), printed workbooks ($25/person), travel at actuals.</p>
+  </div>
+
+  <div class="card">
+    <h2>How It Compares</h2>
+    <table class="compare-table">
+      <tr>
+        <th>Program</th>
+        <th>Onsite?</th>
+        <th>Your Data?</th>
+        <th>Dashboard?</th>
+        <th>Assessment?</th>
+        <th>Action Plan?</th>
+      </tr>
+      <tr><td>McDonald Group ($175)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
+      <tr><td>BCI ($1,495/person)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td></tr>
+      <tr><td>NCM Associates ($1,845)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
+      <tr><td>NADA ($2,995)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="no">No</td></tr>
+      <tr><td>AEDF ($2,995/person)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td></tr>
+      <tr><td>Service Drive (~$730)</td><td class="no">No</td><td class="no">No</td><td class="no">No</td><td class="yes">Yes</td><td class="no">No</td></tr>
+      <tr class="hedss-row"><td><strong>HEDS Academy ($8,000)</strong></td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td><td class="yes">Yes</td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">At 12 participants: $667/person — less than half the cheapest online competitor, delivered onsite with real data.</p>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>Ready to train your team?</h2>
+    <p>Book a 30-minute discovery call. We'll review your operation and recommend where to start.</p>
+    <a class="cta-btn" onclick="showSection('contact', this)">Get in Touch</a>
+  </div>
+</div>
+
+<!-- ===== CONTACT SECTION ===== -->
+<div class="section" id="sec-contact">
+  <div class="hero">
+    <h2>Let's Talk</h2>
+    <p>Book a 30-minute discovery call. We'll review what's happening in your operation and recommend where to start — whether that's an inspection, training, or both.</p>
+  </div>
+
+  <div class="card contact-block">
+    <div class="contact-item">
+      <span>📧</span>
+      <a href="mailto:daniel@hedsconsulting.net">daniel@hedsconsulting.net</a>
+    </div>
+    <div class="contact-item">
+      <span>📞</span>
+      <a href="tel:8135997893">813-599-7893</a>
+    </div>
+    <div class="contact-item">
+      <span>📍</span>
+      <span>Leesburg, Florida</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>What Happens on the Discovery Call</h2>
+    <ul>
+      <li>We discuss your operation — service, parts, rental, branch structure</li>
+      <li>We identify the top 2-3 areas where margin may be leaking</li>
+      <li>We recommend the right service: inspection, training, or both</li>
+      <li>If training is the right fit, we send the 4-report pre-work data request</li>
+      <li>If inspection is the right fit, we scope the audit and schedule the onsite</li>
+      <li>No obligation. No pressure. Just a clear recommendation.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Service Lines</h2>
+    <table class="table">
+      <tr><th>Service</th><th>What It Does</th><th>Starting At</th></tr>
+      <tr><td><strong>Due Diligence &amp; Inspections</strong></td><td>Onsite audit that finds the dollar leaks</td><td>$1,600 (1-day, single department)</td></tr>
+      <tr><td><strong>Training &amp; Academy</strong></td><td>5-day onsite program that installs the discipline</td><td>$8,000 (5-day, up to 12 participants)</td></tr>
+      <tr><td><strong>Follow-Up Coaching</strong></td><td>Virtual sessions targeting specific stalled metrics</td><td>$300/session</td></tr>
+      <tr><td><strong>Acquisition Due Diligence</strong></td><td>EBITDA quality and operational risk assessment</td><td>$4,800–$8,000</td></tr>
+    </table>
+    <p style="font-size:0.85rem;color:var(--muted);margin-top:12px;">All pricing built from a $200/hour labor rate. Travel billed at actuals.</p>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>Prefer email?</h2>
+    <p>Send a message and we'll respond within 24 hours.</p>
+    <a class="cta-btn" href="mailto:daniel@hedsconsulting.net?subject=HEDS%20Inquiry">Email Daniel</a>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer">
+  <img src="LOGO_HEDS.png" alt="HEDS" onerror="this.style.display='none'">
+  <p><strong style="color:var(--accent);">HEDS</strong> — Heavy Equipment Dealer Solutions</p>
+  <p>Leesburg, Florida &nbsp;|&nbsp; daniel@hedsconsulting.net &nbsp;|&nbsp; 813-599-7893</p>
+  <p style="margin-top:8px;opacity:0.5;">© 2026 HEDS. All rights reserved.</p>
+</div>
+
+<script>
+function showSection(secId, btn) {
+  document.querySelectorAll('.section').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(el) {
+    el.classList.remove('active');
+  });
+  document.getElementById('sec-' + secId).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0, 0);
+}
+</script>
+
+</body>
+</html>
